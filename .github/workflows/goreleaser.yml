@@ -4,21 +4,13 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
-      - 'resources/**'
-      - 'CODEOWNERS'
-      - 'LICENSE'
 
 permissions:
   contents: write
 
 jobs:
   goreleaser:
-    if: ${{ github.event.pull_request.merged }}
+    #if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -28,7 +20,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
-        go-version: 1.20
+        go-version: 'stable'
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v4
       with:
